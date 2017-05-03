@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/sensetime/CLionProjects/disnet/convnet.cpp
+util.h
+C:/Users/sensetime/CLionProjects/disnet/util.h
+stdio.h
+C:/Users/sensetime/CLionProjects/disnet/stdio.h
+string.h
+-
+memory.h
+-
+
+C:/Users/sensetime/CLionProjects/disnet/util.h
+stdio.h
+-
+
