@@ -7,6 +7,8 @@
 #define BITWIDTH 4
 #include <stdio.h>
 
+typedef ap_fixed<16, 6> data_16f;
+
 /* Parametrized RGB structure */
 template <int A, int D, int C>
 struct ap_rgb{
@@ -30,6 +32,7 @@ struct data_pack{
 };
 
 
+
 template <typename T>
 class ap_data_64{
 public:
@@ -45,6 +48,14 @@ public:
 #pragma AP data_pack variable=a
         for (int i = 0; i < BITWIDTH; i++)
             a[i] = init;
+    }
+    ap_data_64(data_pack<T>& data){
+#pragma AP INLINE
+    	this->a[0]=data.a0;
+    	this->a[1]=data.a1;
+    	this->a[2]=data.a2;
+    	this->a[3]=data.a3;
+
     }
     ~ap_data_64(){};
     ap_data_64& operator = (const ap_data_64& data){
@@ -190,6 +201,7 @@ public:
     void shift_up();
     void shift_down();
     void insert(T value, int row,int col);
+    void insert(data_pack<data_16f> value, int row, int col);
     void print();
     T getval(int RowIndex,int ColIndex);
 };
@@ -293,6 +305,14 @@ void ap_window<T,LROW,LCOL>::insert(T value, int row, int col){
     M[row][col] = value;
 }
 
+template <typename T, int LROW, int LCOL>
+void ap_window<T,LROW,LCOL>::insert(data_pack<data_16f> value, int row, int col){
+#pragma AP inline
+    M[row][col].a[0] = value.a0;
+    M[row][col].a[1] = value.a1;
+    M[row][col].a[2] = value.a2;
+    M[row][col].a[3] = value.a3;
+}
 /* Window getval
  * Returns the value of any window location
  */

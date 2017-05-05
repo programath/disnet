@@ -11,9 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55fda10a-a5cc-480d-b759-c62d92d662e4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/convnet.cpp" afterPath="$PROJECT_DIR$/convnet.cpp" />
-    </list>
+    <list default="true" id="55fda10a-a5cc-480d-b759-c62d92d662e4" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -38,9 +36,13 @@
       <file leaf-file-name="convnet.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/convnet.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="120" column="5" lean-forward="true" selection-start-line="120" selection-start-column="5" selection-end-line="120" selection-end-column="5" />
-              <folding />
+            <state relative-caret-position="135">
+              <caret line="102" column="31" lean-forward="true" selection-start-line="102" selection-start-column="31" selection-end-line="102" selection-end-column="31" />
+              <folding>
+                <element signature="e#1577#1599#0" expanded="true" />
+                <element signature="e#2307#2408#0" expanded="true" />
+                <element signature="e#4784#4830#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -335,18 +337,17 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34512000" />
+    <option name="totallyTimeSpent" value="35088000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3270142" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3601896" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3601896" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32871974" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18008785" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -386,7 +387,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/convnet.cpp</url>
-          <line>43</line>
+          <line>56</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
       </breakpoints>
@@ -440,11 +441,11 @@
         <state relative-caret-position="-1635">
           <caret line="71" column="45" lean-forward="false" selection-start-line="71" selection-start-column="45" selection-end-line="71" selection-end-column="45" />
           <folding>
-            <marker date="1493959448455" expanded="false" signature="5387:5428" ph="&lt;T,int LROW,int LCOL&gt;" />
-            <marker date="1493959448455" expanded="false" signature="5781:5822" ph="&lt;T,int LROW,int LCOL&gt;" />
-            <marker date="1493959448455" expanded="false" signature="6181:6222" ph="&lt;T,int LROW,int LCOL&gt;" />
-            <marker date="1493959448455" expanded="false" signature="6526:6567" ph="&lt;T,int LROW,int LCOL&gt;" />
-            <marker date="1493959448455" expanded="false" signature="6743:6784" ph="&lt;T,int LROW,int LCOL&gt;" />
+            <marker date="1493975332548" expanded="false" signature="5659:5700" ph="&lt;T,int LROW,int LCOL&gt;" />
+            <marker date="1493975332548" expanded="false" signature="6053:6094" ph="&lt;T,int LROW,int LCOL&gt;" />
+            <marker date="1493975332548" expanded="false" signature="6453:6494" ph="&lt;T,int LROW,int LCOL&gt;" />
+            <marker date="1493975332548" expanded="false" signature="6798:6839" ph="&lt;T,int LROW,int LCOL&gt;" />
+            <marker date="1493975332548" expanded="false" signature="7015:7056" ph="&lt;T,int LROW,int LCOL&gt;" />
           </folding>
         </state>
       </provider>
@@ -453,7 +454,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
           <caret line="85" column="58" lean-forward="true" selection-start-line="85" selection-start-column="58" selection-end-line="85" selection-end-column="58" />
-          <folding />
+          <folding>
+            <element signature="e#1577#1599#0" expanded="true" />
+            <element signature="e#2307#2408#0" expanded="true" />
+            <element signature="e#4784#4830#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -487,11 +492,11 @@
         <state relative-caret-position="315">
           <caret line="117" column="30" lean-forward="false" selection-start-line="117" selection-start-column="30" selection-end-line="117" selection-end-column="30" />
           <folding>
-            <marker date="1493959448455" expanded="false" signature="5387:5428" ph="&lt;T,int LROW,int LCOL&gt;" />
-            <marker date="1493959448455" expanded="false" signature="5781:5822" ph="&lt;T,int LROW,int LCOL&gt;" />
-            <marker date="1493959448455" expanded="false" signature="6181:6222" ph="&lt;T,int LROW,int LCOL&gt;" />
-            <marker date="1493959448455" expanded="false" signature="6526:6567" ph="&lt;T,int LROW,int LCOL&gt;" />
-            <marker date="1493959448455" expanded="false" signature="6743:6784" ph="&lt;T,int LROW,int LCOL&gt;" />
+            <marker date="1493975332548" expanded="false" signature="5659:5700" ph="&lt;T,int LROW,int LCOL&gt;" />
+            <marker date="1493975332548" expanded="false" signature="6053:6094" ph="&lt;T,int LROW,int LCOL&gt;" />
+            <marker date="1493975332548" expanded="false" signature="6453:6494" ph="&lt;T,int LROW,int LCOL&gt;" />
+            <marker date="1493975332548" expanded="false" signature="6798:6839" ph="&lt;T,int LROW,int LCOL&gt;" />
+            <marker date="1493975332548" expanded="false" signature="7015:7056" ph="&lt;T,int LROW,int LCOL&gt;" />
           </folding>
         </state>
       </provider>
@@ -500,7 +505,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2445">
           <caret line="20" column="37" lean-forward="false" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
-          <folding />
+          <folding>
+            <element signature="e#1577#1599#0" expanded="true" />
+            <element signature="e#2307#2408#0" expanded="true" />
+            <element signature="e#4784#4830#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -526,11 +535,11 @@
         <state relative-caret-position="315">
           <caret line="117" column="30" lean-forward="false" selection-start-line="117" selection-start-column="30" selection-end-line="117" selection-end-column="30" />
           <folding>
-            <marker date="1493959448455" expanded="false" signature="5387:5428" ph="&lt;T,int LROW,int LCOL&gt;" />
-            <marker date="1493959448455" expanded="false" signature="5781:5822" ph="&lt;T,int LROW,int LCOL&gt;" />
-            <marker date="1493959448455" expanded="false" signature="6181:6222" ph="&lt;T,int LROW,int LCOL&gt;" />
-            <marker date="1493959448455" expanded="false" signature="6526:6567" ph="&lt;T,int LROW,int LCOL&gt;" />
-            <marker date="1493959448455" expanded="false" signature="6743:6784" ph="&lt;T,int LROW,int LCOL&gt;" />
+            <marker date="1493975332548" expanded="false" signature="5659:5700" ph="&lt;T,int LROW,int LCOL&gt;" />
+            <marker date="1493975332548" expanded="false" signature="6053:6094" ph="&lt;T,int LROW,int LCOL&gt;" />
+            <marker date="1493975332548" expanded="false" signature="6453:6494" ph="&lt;T,int LROW,int LCOL&gt;" />
+            <marker date="1493975332548" expanded="false" signature="6798:6839" ph="&lt;T,int LROW,int LCOL&gt;" />
+            <marker date="1493975332548" expanded="false" signature="7015:7056" ph="&lt;T,int LROW,int LCOL&gt;" />
           </folding>
         </state>
       </provider>
@@ -561,9 +570,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/convnet.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="120" column="5" lean-forward="true" selection-start-line="120" selection-start-column="5" selection-end-line="120" selection-end-column="5" />
-          <folding />
+        <state relative-caret-position="135">
+          <caret line="102" column="31" lean-forward="true" selection-start-line="102" selection-start-column="31" selection-end-line="102" selection-end-column="31" />
+          <folding>
+            <element signature="e#1577#1599#0" expanded="true" />
+            <element signature="e#2307#2408#0" expanded="true" />
+            <element signature="e#4784#4830#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
