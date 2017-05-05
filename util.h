@@ -4,7 +4,7 @@
 
 #ifndef DISNET_UTIL_H
 #define DISNET_UTIL_H
-
+#define BITWIDTH 4
 #include <stdio.h>
 
 /* Parametrized RGB structure */
@@ -26,27 +26,28 @@ struct ap_yuv{
 template <typename T>
 class ap_data_64{
 public:
-    T a[4];
+    T a[BITWIDTH];
     ap_data_64(){
 #pragma AP ARRAY_PARTITION variable=a dim=0 complete
 #pragma AP data_pack variable=a
-        for (int i=0; i < 4; i++)
+        for (int i = 0; i < BITWIDTH; i++)
             a[i] = 0;
     };
     ap_data_64(short init){
 #pragma AP ARRAY_PARTITION variable=a dim=0 complete
 #pragma AP data_pack variable=a
-        for (int i=0; i < 4; i++)
+        for (int i = 0; i < BITWIDTH; i++)
             a[i] = init;
     }
     ~ap_data_64(){};
     ap_data_64& operator = (const ap_data_64& data){
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < BITWIDTH; i++)
             this->a[i] = data.a[i];
         return *this;
     }
     ap_data_64& operator += (const ap_data_64& data){
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < BITWIDTH; i++)
+#pragma AP unroll
             this->a[i] = this->a[i] + data.a[i];
         return *this;
     }
@@ -61,9 +62,11 @@ public:
     ap_linebuffer(){
 #pragma AP ARRAY_PARTITION variable=M dim=1 complete
 #pragma AP data_pack variable=M
+    	T a;
         for (int i=0; i < LROW; i++)
+#pragma AP unroll
             for (int j = 0; j < LCOL; j++)
-                M[i][j] = 0;
+                M[i][j] = a;
     };
     ~ap_linebuffer(){};
     void shift_up(int col);
@@ -159,9 +162,11 @@ public:
     ap_window(){
 #pragma AP ARRAY_PARTITION variable=M dim=0 complete
 #pragma AP data_pack variable=M
+    	T a;
         for (int i=0; i < LROW; i++)
+#pragma AP unroll
             for (int j = 0; j < LCOL; j++)
-                M[i][j] = T();
+                M[i][j] = a;
     };
     ~ap_window(){};
     void shift_right();

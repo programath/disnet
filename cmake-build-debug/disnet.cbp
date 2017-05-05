@@ -83,6 +83,9 @@
 		<Unit filename="C:/Users/sensetime/CLionProjects/disnet/convnet.cpp">
 			<Option target="disnet"/>
 		</Unit>
+		<Unit filename="C:/Users/sensetime/CLionProjects/disnet/test.cpp">
+			<Option target="disnet"/>
+		</Unit>
 		<Unit filename="C:/Users/sensetime/CLionProjects/disnet/util.h">
 			<Option target="disnet"/>
 		</Unit>

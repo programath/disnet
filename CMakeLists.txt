@@ -3,5 +3,5 @@ project(disnet)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES convnet.cpp util.h)
+set(SOURCE_FILES convnet.cpp util.h test.cpp)
 add_executable(disnet ${SOURCE_FILES})

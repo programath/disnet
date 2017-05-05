@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/disnet.dir/convnet.cpp.obj"
+  "CMakeFiles/disnet.dir/test.cpp.obj"
   "disnet.pdb"
   "disnet.exe"
   "disnet.exe.manifest"
