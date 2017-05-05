@@ -23,12 +23,19 @@ struct ap_yuv{
     unsigned int V;
 };
 
+
+template <typename T>
+struct data_pack{
+	T a0, a1, a2, a3;
+};
+
+
 template <typename T>
 class ap_data_64{
 public:
     T a[BITWIDTH];
     ap_data_64(){
-#pragma AP ARRAY_PARTITION variable=a dim=0 complete
+//#pragma AP ARRAY_PARTITION variable=a dim=0 complete
 #pragma AP data_pack variable=a
         for (int i = 0; i < BITWIDTH; i++)
             a[i] = 0;
@@ -45,6 +52,13 @@ public:
             this->a[i] = data.a[i];
         return *this;
     }
+    ap_data_64& operator = (const data_pack<T>& data){
+        this->a[0] = data.a0;
+        this->a[1] = data.a1;
+        this->a[2] = data.a2;
+        this->a[3] = data.a3;
+        return *this;
+    }
     ap_data_64& operator += (const ap_data_64& data){
         for (int i = 0; i < BITWIDTH; i++)
 #pragma AP unroll
@@ -52,6 +66,8 @@ public:
         return *this;
     }
 };
+
+
 
 /* Line buffer class definition */
 template <typename T, int LROW, int LCOL>

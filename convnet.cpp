@@ -27,19 +27,32 @@ typedef ap_window<data_64, WIN_ROW, WIN_COL> WINDOW;
 #define NUM_CHN_DIV_4 (NUM_CHN >> 2)
 #define OUT_CHN_DIV_4 (OUT_CHN >> 2)
 
-void init_layers_64(data_64* input,data_64* filter, short in_chn, short in_h, short in_w, short out_chn, short k_h, short k_w){
-    for (int i = 0; i < in_chn; i++)
-        for (int j = 0; j < in_h; j++)
-            for (int k = 0; k < in_w; k++)
-                for (int l = 0; l < BITWIDTH; l++)
-                    input[i * in_h * in_w + j * in_w + k].a[l] = 1;
+#pragma SDS data access_pattern(input:SEQUENTIAL, filter:SEQUENTIAL)
+void init_layers_64(data_pack<data_16f> input[121],data_pack<data_16f> filter[9], short in_chn, short in_h, short in_w, short out_chn, short k_h, short k_w){
+    int cnt = 0;
+	for (int i = 0; i < 1; i++)
+        for (int j = 0; j < 11; j++)
+            for (int k = 0; k < 11; k++){
+#pragma AP pipeline II=1
+                input[cnt].a0 = 1;
+                input[cnt].a1 = 2;
+                input[cnt].a2 = 3;
+                input[cnt].a3 = 4;
+                cnt++;
 
+            }
 
-    for (int i = 0; i < out_chn; i++)
-        for (int j = 0; j < k_h; j++)
-            for (int k = 0; k < k_w; k++)
-                for (int l = 0; l < 4; l++)
-                    filter[i * k_h * k_w + j * k_w + k].a[l] = 1;
+	cnt = 0;
+    for (int i = 0; i < 1; i++)
+        for (int j = 0; j < 3; j++)
+            for (int k = 0; k < 3; k++){
+#pragma AP pipeline
+                filter[cnt].a0 = 1;
+                filter[cnt].a1 = 2;
+                filter[cnt].a2 = 3;
+                filter[cnt].a3 = 4;
+                cnt++;
+            }
 }
 template <short k_h, short k_w>
 data_64 conv2d_operator_64(ap_window<data_64, k_h, k_w>* input_window, ap_window<data_64, k_h, k_w>* filter){
@@ -52,6 +65,7 @@ data_64 conv2d_operator_64(ap_window<data_64, k_h, k_w>* input_window, ap_window
             for (int i = 0; i < k_h; i++)
                 FILTER_COL_LOOP:
                 for (int j = 0; j < k_w; j++)
+#pragma AP pipeline
                     out_val.a[fc] = out_val.a[fc] + input_window->getval(i,j).a[ic] * filter->getval(i,j).a[fc];
 
     return out_val;
@@ -71,7 +85,10 @@ output: fc*((h-fh+2*padding)/s+1)*((w-fw+2*padding)/s+1)
 template <short in_chn, short in_h, short in_w, short out_chn, short k_h, short k_w, short out_h, short out_w>
 void conv2d(data_64 input[in_chn * in_h * in_w], data_64 filter[out_chn * k_h * k_w], data_64 output[out_chn * out_h * out_w],
           short stride, short padding) {
-
+#pragma HLS INLINE
+#pragma HLS array_partition variable=input cyclic factor = 4 dim = 1
+#pragma HLS array_partition variable=filter cyclic factor = 2 dim = 1
+#pragma HLS array_partition variable=output cyclic factor = 4 dim = 1
 
     FILTER_CHN_LOOP:
     for (int f = 0; f < out_chn; f++){
@@ -92,6 +109,7 @@ void conv2d(data_64 input[in_chn * in_h * in_w], data_64 filter[out_chn * k_h * 
             for (int i = 0; i < in_h; i++) {
                 IMAGE_W_LOOP:
 				for (int j = 0; j < in_w; j++) {
+#pragma AP pipeline II=4
                     line_buffer.shift_up(j);
                     data_64 temp2 = input[k * in_h * in_w + i * in_w + j];
                     line_buffer.insert_bottom(temp2, j);
@@ -205,7 +223,32 @@ void relu_layer(data_64* input, short in_chn, short in_h, short in_w){
             for (int k = 0; k < in_w; k++)
                 input[i * in_h * in_w + j * in_w + k] = relu(input[i * in_h * in_w + j * in_w + k]);
 }
+#pragma SDS data access_pattern(image:SEQUENTIAL, filter:SEQUENTIAL, output:SEQUENTIAL)
+void conv2d_wrapper(data_pack<data_16f> image[121], data_pack<data_16f> filter[9], data_pack<data_16f> output[81], short stride, short padding){
+	data_64 imageBuf[121], filterBuf[9], outputBuf[81];
 
+#pragma HLS array_partition variable=imageBuf block factor=4 dim=1
+#pragma HLS array_partition variable=filterBuf block factor=2 dim=1
+
+    for(int i=0; i<121; i++) {
+#pragma HLS PIPELINE
+        imageBuf[i] = image[i];
+    }
+    for(int i=0; i<9; i++) {
+#pragma HLS PIPELINE
+        filterBuf[i] = filter[i];
+    }
+
+	conv2d<1,11,11,1,3,3,9,9>(imageBuf, filterBuf, outputBuf, 3, 3);
+	for (int i=0; i < 81; i++){
+#pragma HLS PIPELINE
+		output[i].a0 = outputBuf[i].a[0];
+		output[i].a1 = outputBuf[i].a[1];
+		output[i].a2 = outputBuf[i].a[2];
+		output[i].a3 = outputBuf[i].a[3];
+
+	}
+}
 
 int main(){
     short in_ch = 1, in_h = 11, in_w = 11,
@@ -214,20 +257,26 @@ int main(){
     short out_h = (in_h + 2 * padding - k_h)/stride + 1;
     short out_w = (in_w + 2 * padding - k_w)/stride + 1;
 
-    data_64 image[1 * 11 * 11];
-    data_64 filter[1 * 3 * 3];
-    data_64 output[1 * 9 * 9];
+    data_pack<data_16f> image[1 * 11 * 11];
+    data_pack<data_16f> filter[1 * 3 * 3];
+    data_pack<data_16f> output[1 * 9 * 9];
+
+#pragma AP data_pack variable=image
+#pragma AP data_pack variable=filter
+#pragma AP data_pack variable=output
+
                 /* in_chn, in_h, in_w,
                  out_chn, k_h,  k_w,
                  stride, padding
                 */
     init_layers_64(image, filter, 1, 11, 11, 1, 3, 3);
-    conv2d<1,11,11,1,3,3,9,9>(image, filter, output, 3, 3);
+    conv2d_wrapper(image, filter, output, 3, 3);
+    //conv2d<1,11,11,1,3,3,9,9>(image, filter, output, 3, 3);
     //deconv2d<7,7,7,7>(image, filter, output, 1, 1, 3, 3);
     for (int i = 0; i < 1 * 9 * 9; i++){
         if (i % 9 == 0)
             printf("\n");
-        printf("%.2f ", float(output[i].a[2]));
+        printf("%.2f ", float(output[i].a0));
     }
 
 
